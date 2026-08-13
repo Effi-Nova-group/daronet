@@ -1,0 +1,44 @@
+- generic [ref=f57e2]:
+  - banner [ref=f57e3]:
+    - link [ref=f57e7] [cursor=pointer]:
+      - /url: "#"
+  - main [ref=f57e8]:
+    - main [ref=f57e9]:
+      - heading "In a crowded marketplace, bold thinking wins" [level=1] [ref=f57e10]: In a crowded marketplace,bold thinking wins
+    - generic [ref=f57e18]:
+      - generic [ref=f57e19]:
+        - generic [ref=f57e20]: About Daronet
+        - heading [level=2] [ref=f57e22]:
+          - strong [ref=f57e23]: A digital agency built for bold brands
+        - paragraph [ref=f57e25]: Daronet is a digital agency and software house founded in 1999. Headquartered in Israel, we specialise in custom web development, e-commerce stores, content management systems (CMS), search engine optimisation (SEO), and intranet/extranet solutions for commercial enterprises.
+      - generic [ref=f57e26]:
+        - generic [ref=f57e27]:
+          - heading "Web Development" [level=3] [ref=f57e31]
+          - paragraph [ref=f57e32]: Custom website development for small businesses, enterprises, and government groups.
+        - generic [ref=f57e33]:
+          - heading "E-Commerce" [level=3] [ref=f57e38]
+          - paragraph [ref=f57e39]: Online shop development tailored to B2B and B2C markets.
+        - generic [ref=f57e40]:
+          - heading "Digital Marketing" [level=3] [ref=f57e43]
+          - paragraph [ref=f57e44]: SEO and ongoing promotion within search engines.
+        - generic [ref=f57e45]:
+          - heading "Hosting & Maintenance" [level=3] [ref=f57e51]
+          - paragraph [ref=f57e52]: Comprehensive digital infrastructure and technical support.
+    - generic [ref=f57e55]:
+      - generic [ref=f57e56]: Trusted by the world's leading brands
+      - generic [ref=f57e58]:
+        - img "JLL" [ref=f57e60]
+        - img "IBM" [ref=f57e62]
+        - img "Disney" [ref=f57e64]
+        - img "FIFA" [ref=f57e66]
+        - img "Netflix" [ref=f57e68]
+    - generic [ref=f57e78]:
+      - heading "Contact us" [level=2] [ref=f57e81]
+      - generic [ref=f57e82]:
+        - generic [ref=f57e83]: Toll Free
+        - link "1 300 926 895" [ref=f57e84] [cursor=pointer]:
+          - /url: tel:1300926895
+    - generic [ref=f57e90]:
+      - link [ref=f57e93] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=f57e95]: © 2026 Daronet. All rights reserved.

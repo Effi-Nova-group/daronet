@@ -1,0 +1,53 @@
+- generic [ref=f15e2]:
+  - banner [ref=f15e3]:
+    - generic [ref=f15e5]:
+      - link [ref=f15e7] [cursor=pointer]:
+        - /url: "#"
+      - generic:
+        - navigation
+      - link "Get started" [ref=f15e10] [cursor=pointer]:
+        - /url: "#contact"
+  - main [ref=f15e11]:
+    - main [ref=f15e12]:
+      - heading "In a crowded marketplace, bold thinking wins" [level=1] [ref=f15e13]: In a crowded marketplace,bold thinking wins
+    - generic [ref=f15e20]:
+      - generic [ref=f15e21]:
+        - generic [ref=f15e22]: About Daronet
+        - heading [level=2] [ref=f15e24]:
+          - strong [ref=f15e25]: A digital agency built for bold brands
+        - paragraph [ref=f15e27]: Daronet is a digital agency and software house founded in 1999. Headquartered in Israel, we specialise in custom web development, e-commerce stores, content management systems (CMS), search engine optimisation (SEO), and intranet/extranet solutions for commercial enterprises.
+      - generic [ref=f15e28]:
+        - generic [ref=f15e29]:
+          - generic [ref=f15e30]: 01 — Service
+          - heading "Web Development" [level=3] [ref=f15e31]
+          - paragraph [ref=f15e32]: Custom website development for small businesses, enterprises, and government groups.
+        - generic [ref=f15e33]:
+          - generic [ref=f15e34]: 02 — Service
+          - heading "E-Commerce" [level=3] [ref=f15e35]
+          - paragraph [ref=f15e36]: Online shop development tailored to B2B and B2C markets.
+        - generic [ref=f15e37]:
+          - generic [ref=f15e38]: 03 — Service
+          - heading "Digital Marketing" [level=3] [ref=f15e39]
+          - paragraph [ref=f15e40]: SEO and ongoing promotion within search engines.
+        - generic [ref=f15e41]:
+          - generic [ref=f15e42]: 04 — Service
+          - heading "Hosting & Maintenance" [level=3] [ref=f15e43]
+          - paragraph [ref=f15e44]: Comprehensive digital infrastructure and technical support.
+    - generic [ref=f15e47]:
+      - generic [ref=f15e48]: Trusted by the world's leading brands
+      - generic [ref=f15e50]:
+        - img "JLL" [ref=f15e52]
+        - img "IBM" [ref=f15e54]
+        - img "Disney" [ref=f15e56]
+        - img "FIFA" [ref=f15e58]
+        - img "Netflix" [ref=f15e60]
+    - generic [ref=f15e70]:
+      - heading "Contact us" [level=2] [ref=f15e73]
+      - generic [ref=f15e74]:
+        - generic [ref=f15e75]: Toll Free
+        - link "1 300 926 895" [ref=f15e76] [cursor=pointer]:
+          - /url: tel:1300926895
+    - generic [ref=f15e82]:
+      - link [ref=f15e85] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=f15e87]: © 2026 Daronet. All rights reserved.
