@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Blog — Daronet" description="Enterprise engineering insights from the Daronet team.">
+  <section class="blog-index">
+    <div class="blog-index__container">
+      <header class="blog-index__header">
+        <p class="blog-index__eyebrow">Insights</p>
+        <h1 class="blog-index__title">Explore Our Latest Insights &amp; Engineering Journeys</h1>
+        <p class="blog-index__sub">Deep dives on custom back-end architecture, secure integrations, and building enterprise software that scales.</p>
+      </header>
+
+      <div class="blog-index__grid">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}/`} class="blog-card">
+            <div class="blog-card__media">
+              <span class="blog-card__tag">{post.data.tag}</span>
+              <Image src={post.data.image} alt={post.data.title} widths={[400, 800, 1200]} sizes="(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw" class="blog-card__img" />
+            </div>
+            <div class="blog-card__body">
+              <h2 class="blog-card__title">{post.data.title}</h2>
+              <p class="blog-card__desc">{post.data.description}</p>
+              <div class="blog-card__meta">
+                <span class="blog-card__author">{post.data.author}</span>
+                <span class="blog-card__dot" aria-hidden="true">•</span>
+                <span class="blog-card__role">{post.data.authorRole}</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  :root {
+    --accent-red: #ff2e4d;
+    --accent-red-2: #ff6a3d;
+  }
+  .blog-index { padding: clamp(6rem, 12vw, 10rem) 0 clamp(4rem, 8vw, 6rem); background: #0a0208; color: #fff; }
+  .blog-index__container { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+  .blog-index__header { text-align: center; max-width: 720px; margin: 0 auto 4rem; }
+  .blog-index__eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-red); font-weight: 700; margin: 0 0 1rem; }
+  .blog-index__title { font-size: clamp(2.25rem, 5vw, 3.25rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 1rem; color: #fff; }
+  .blog-index__sub { font-size: 1.05rem; line-height: 1.6; color: rgba(255,255,255,0.65); margin: 0; }
+  .blog-index__grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 2rem; }
+  @media (max-width: 960px) { .blog-index__grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 640px)  { .blog-index__grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+  .blog-card {
+    display: flex; flex-direction: column;
+    text-decoration: none; color: inherit;
+    background: linear-gradient(180deg, rgba(20,4,8,0.85), rgba(10,2,4,0.9));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .blog-card:hover { transform: translateY(-4px); border-color: rgba(255,46,77,0.35); box-shadow: 0 24px 60px -30px rgba(255,46,77,0.35); }
+  .blog-card__media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #13111a; }
+  .blog-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+  .blog-card:hover .blog-card__img { transform: scale(1.04); }
+  .blog-card__tag {
+    position: absolute; top: 0.9rem; left: 0.9rem; z-index: 1;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+    padding: 0.4rem 0.75rem; border-radius: 999px;
+    background: rgba(0,0,0,0.55); color: #fff; backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,46,77,0.4);
+  }
+  .blog-card__body { padding: 1.5rem 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+  .blog-card__title { font-size: 1.15rem; line-height: 1.35; font-weight: 700; letter-spacing: -0.01em; margin: 0; color: #fff; }
+  .blog-card__desc { font-size: 0.95rem; line-height: 1.55; color: rgba(255,255,255,0.65); margin: 0; flex: 1; }
+  .blog-card__meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-top: 0.5rem; }
+  .blog-card__dot { opacity: 0.5; }
+</style>
