@@ -290,8 +290,8 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
 /* Mobile overrides */
 @media (max-width: 767px) {
   .heading-hero-text {
-    font-size: clamp(3.25rem, 14.5vw, 5rem) !important;
-    line-height: 1 !important;
+    font-size: clamp(2rem, 9vw, 3.5rem) !important;
+    line-height: 1.05 !important;
     text-align: left !important;
     padding: 0 1.25rem 2rem 1.25rem !important;
     margin: 0 !important;
@@ -306,10 +306,12 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
     letter-spacing: -0.03em !important;
     text-shadow: 0 2px 20px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.7);
     word-break: normal;
-    overflow-wrap: normal;
+    overflow-wrap: break-word;
     hyphens: none;
     z-index: 2;
   }
+  /* Drop the forced line break so long phrases wrap naturally on narrow screens */
+  .heading-hero-text br { display: none; }
   .seaction-header-main { overflow: hidden !important; position: relative; }
   .seaction-header-main::after {
     content: "";
@@ -554,7 +556,7 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
     <main class="main-wrapper">
       <div></div>
       <main class="seaction-header-main">
-        <h1 class="heading-hero-text">In a crowded marketplace,<br>bold thinking wins</h1>
+        <h1 class="heading-hero-text">In a crowded marketplace, <br>bold thinking wins</h1>
         <div id="canvas" class="canvas"></div>
         <div data-video-urls="2235742-hd_1280_720_30fps.mp4" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="header_background-image w-background-video w-background-video-atom"><video id="de29832d-7261-4c36-ea82-87eea1bc0c2e-video" autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
             <source src="/2235742-hd_1280_720_30fps.mp4" data-wf-ignore="true">
