@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Thanks — we've got your message | Daronet"
+  description="Thanks for reaching out to Daronet — we'll be in touch soon."
+  noindex
+>
+  <section class="thankyou">
+    <div class="thankyou__container">
+      <div class="thankyou__card">
+        <div class="thankyou__badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h1 class="thankyou__title"><span class="heading-accent">Thanks</span> — we've got your message</h1>
+        <p class="thankyou__body">One of the team will be in touch shortly to schedule your strategy call. In the meantime, feel free to keep exploring.</p>
+        <div class="thankyou__cta">
+          <div class="button-primary-gradient header-button">
+            <a href="/" class="button-primary small-v2 w-button">Back to home</a>
+          </div>
+          <a href="/blog" class="thankyou__secondary">Read the latest insights →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  :root {
+    --accent-red: #ff2e4d;
+    --accent-red-2: #ff6a3d;
+  }
+  .thankyou { padding: clamp(6rem, 14vw, 10rem) 0 clamp(4rem, 8vw, 6rem); background: #0a0208; color: #fff; min-height: 70vh; display: flex; align-items: center; }
+  .thankyou__container { max-width: 720px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); width: 100%; }
+  .thankyou__card {
+    text-align: center;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+    border-radius: 22px;
+    background: linear-gradient(140deg, rgba(255, 46, 77, 0.14), rgba(255, 46, 77, 0.05) 55%, rgba(255, 106, 61, 0.09));
+    border: 1px solid rgba(255, 46, 77, 0.22);
+    box-shadow: 0 20px 50px -25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    position: relative;
+    overflow: hidden;
+  }
+  .thankyou__badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-red-2));
+    color: #fff;
+    margin: 0 auto 1.75rem;
+    box-shadow: 0 10px 30px -10px rgba(255, 46, 77, 0.55);
+  }
+  .heading-accent {
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-red-2));
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--accent-red); /* fallback */
+  }
+  .thankyou__title { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 1rem; color: #fff; }
+  .thankyou__body { font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.75); margin: 0 auto 2.5rem; max-width: 480px; }
+  .thankyou__cta { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+  .thankyou__secondary { font-size: 0.9rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s ease; }
+  .thankyou__secondary:hover { color: var(--accent-red-2); }
+</style>

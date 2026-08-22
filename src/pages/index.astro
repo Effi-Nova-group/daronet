@@ -719,10 +719,11 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
                   <a href="tel:1300926895" class="contact_tollfree-number">1 300 926 895</a>
                 </div>
                 <div class="contact_full">
-                  <form id="contact-form" class="contact-form" novalidate>
+                  <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" novalidate>
                     <input type="hidden" name="access_key" value="61506a46-cf93-4110-b0f0-49b507b42815">
                     <input type="hidden" name="subject" value="New Strategy Call Request — Daronet">
                     <input type="hidden" name="from_name" value="Daronet Website">
+                    <input type="hidden" name="redirect" value="https://daronet.com.au/thank-you/">
                     <input type="checkbox" name="botcheck" class="contact-form__botcheck" tabindex="-1" autocomplete="off">
                     <div class="contact-form__grid">
                       <div class="contact-form__field">
@@ -816,16 +817,16 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
           const data = await response.json();
           if (data.success) {
             result.dataset.state = "success";
-            result.textContent = "Thanks — we'll be in touch shortly.";
-            form.reset();
+            result.textContent = "Thanks — redirecting…";
+            window.location.href = "/thank-you/";
           } else {
             result.dataset.state = "error";
             result.textContent = data.message || "Something went wrong. Please try again.";
+            if (submit) submit.disabled = false;
           }
         } catch (err) {
           result.dataset.state = "error";
           result.textContent = "Network error. Please try again.";
-        } finally {
           if (submit) submit.disabled = false;
         }
       });
