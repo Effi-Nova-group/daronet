@@ -65,6 +65,8 @@ import Base from '../layouts/Base.astro';
   .thankyou__title { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 1rem; color: #fff; }
   .thankyou__body { font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.75); margin: 0 auto 2.5rem; max-width: 480px; }
   .thankyou__cta { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+  /* Override daronet.webflow.css mobile rule that hides .button-primary-gradient.header-button (intended for the nav variant only) */
+  .thankyou__cta .button-primary-gradient.header-button { display: inline-block !important; }
   .thankyou__secondary { font-size: 0.9rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s ease; }
   .thankyou__secondary:hover { color: var(--accent-red-2); }
 </style>

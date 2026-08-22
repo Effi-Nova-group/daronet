@@ -95,5 +95,6 @@ const formattedDate = post.data.publishDate.toLocaleDateString('en-AU', {
   .post__cta { margin-top: 4rem; padding: 2.5rem; border-radius: 18px; background: linear-gradient(180deg, rgba(20,4,8,0.85), rgba(10,2,4,0.9)); border: 1px solid rgba(255,255,255,0.08); text-align: center; position: relative; overflow: hidden; }
   .post__cta::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: linear-gradient(140deg, rgba(255,46,77,0.5), rgba(255,106,61,0.3), transparent 60%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
   .post__cta-text { position: relative; z-index: 1; font-size: 1.1rem; color: rgba(255,255,255,0.85); margin: 0 0 1.5rem; }
-  .post__cta .button-primary-gradient { position: relative; z-index: 1; }
+  /* Override daronet.webflow.css mobile rule that hides .button-primary-gradient.header-button (intended for the nav variant only) */
+  .post__cta .button-primary-gradient.header-button { display: inline-block !important; position: relative; z-index: 1; }
 </style>
