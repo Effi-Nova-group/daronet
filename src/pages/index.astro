@@ -722,6 +722,8 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
           initialCountry: "au",
           preferredCountries: ["au", "nz", "us", "gb"],
           separateDialCode: false,
+          // Append dropdown to <body> so ancestor overflow:hidden can't clip it.
+          dropdownContainer: document.body,
           utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.7.0/build/js/utils.js",
         });
       }
