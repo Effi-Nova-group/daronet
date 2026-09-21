@@ -285,6 +285,116 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
 /* Header CTA in red */
 .button-primary-gradient.header-button { background: linear-gradient(135deg, var(--accent-red), var(--accent-red-2)) !important; }
 
+/* ---------- Hero background video (YouTube, chrome hidden) ---------- */
+/* The old self-hosted mp4 is retired from the page entirely — the file
+   stays on disk, unreferenced, in case it's ever needed again. The hero is
+   the YouTube embed only, and it never plays, or shows any transport UI,
+   until the control script has *confirmed* (by polling for advancing
+   currentTime, not just trusting a state event) that it's genuinely
+   playing frames. Before that confirmation the iframe stays at opacity:0
+   over a plain black background — nothing YouTube-owned, button included,
+   is ever visible.
+   The iframe is also oversized and centered/cropped symmetrically so
+   YouTube's own title bar/branding sit outside the visible crop on every
+   edge and can't be hovered into view. */
+.hero-video {
+  overflow: hidden;
+  background-image: none;
+  background-color: #000;
+}
+.hero-video__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+/* YouTube renders its title bar (top-left) in the iframe's OWN coordinate
+   space, so the iframe is sized above the normal "cover" dimensions and
+   centered over the frame — the extra size is cropped away evenly on all
+   four sides, pushing the title bar (and any other edge-anchored chrome)
+   outside the visible area regardless of timing, while keeping the footage
+   itself centered instead of shifted toward one corner.
+   The brief "ghost" play/pause acknowledgment icon YouTube shows dead
+   center on the *first* PLAYING transition is handled separately (see the
+   playback-confirmation polling below, which keeps the iframe at opacity:0
+   until it's long gone) rather than by inflating this further.
+   1.3x is double the old 1.15x corner-pin overhang because a centered crop
+   only hides half as much margin per edge (the overhang is now split
+   between opposite sides instead of dumped entirely into one corner). */
+.hero-video__iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(130vw, 231.11vh);   /* 1.3x cover-width, 16:9 */
+  height: max(73.13vw, 130vh);   /* 1.3x cover-height, 16:9 */
+  transform: translate(-50%, -50%);
+  border: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+/* Faded in only once playback is confirmed — this is what actually keeps
+   the center ghost icon from ever being visible (see the polling below),
+   not just a way to avoid revealing an unstyled/loading iframe early. */
+.hero-video.is-playing .hero-video__iframe {
+  opacity: 1;
+}
+/* Matches the dim the old <video> got from its background gradient, so the
+   exclusion-blended hero heading keeps its contrast. */
+.hero-video__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* Bottom-right sound toggle. A sibling of .hero-video, .canvas and the hero
+   heading (not nested inside the click-through video stack), so it needs a
+   z-index above .canvas (2, an empty leftover element from the template
+   that still sits over the video) to actually be clickable. */
+.hero-sound-toggle {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 4;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  text-transform: none;
+  mix-blend-mode: normal;
+}
+.hero-sound-toggle:hover {
+  background: rgba(0, 0, 0, 0.55);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.hero-sound-toggle__icon {
+  width: 20px;
+  height: 20px;
+}
+.hero-sound-toggle__icon--unmuted { display: none; }
+.hero-sound-toggle.is-muted .hero-sound-toggle__icon--muted { display: block; }
+.hero-sound-toggle.is-muted .hero-sound-toggle__icon--unmuted { display: none; }
+.hero-sound-toggle:not(.is-muted) .hero-sound-toggle__icon--muted { display: none; }
+.hero-sound-toggle:not(.is-muted) .hero-sound-toggle__icon--unmuted { display: block; }
+@media (max-width: 767px) {
+  .hero-sound-toggle {
+    right: 16px;
+    bottom: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
 /* Hero heading lines: two blocks on desktop, inline on mobile so text wraps naturally with a real space */
 .heading-hero-text .hero-line { display: block; }
 
@@ -470,9 +580,33 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
         <h1 class="heading-hero-text"><span class="hero-line">In a crowded marketplace,</span>
           <span class="hero-line">bold thinking wins</span></h1>
         <div id="canvas" class="canvas"></div>
-        <div data-video-urls="2235742-hd_1280_720_30fps.mp4" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="header_background-image w-background-video w-background-video-atom"><video id="de29832d-7261-4c36-ea82-87eea1bc0c2e-video" autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-            <source src="/2235742-hd_1280_720_30fps.mp4" data-wf-ignore="true">
-          </video></div>
+        <div class="header_background-image hero-video">
+          <div class="hero-video__frame">
+            <iframe
+              class="hero-video__iframe"
+              id="hero-yt"
+              src="https://www.youtube-nocookie.com/embed/61Cc03ewXP4?autoplay=1&amp;mute=1&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;iv_load_policy=3&amp;cc_load_policy=0&amp;disablekb=1&amp;fs=0&amp;playsinline=1&amp;enablejsapi=1"
+              title="Daronet showreel"
+              allow="autoplay; encrypted-media"
+              referrerpolicy="strict-origin-when-cross-origin"
+              tabindex="-1"
+              aria-hidden="true"
+              frameborder="0"></iframe>
+          </div>
+          <div class="hero-video__overlay" aria-hidden="true"></div>
+        </div>
+        <button type="button" class="hero-sound-toggle is-muted" hidden aria-pressed="false" aria-label="Unmute video">
+          <svg class="hero-sound-toggle__icon hero-sound-toggle__icon--muted" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/>
+            <line x1="16" y1="9" x2="21" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="21" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg class="hero-sound-toggle__icon hero-sound-toggle__icon--unmuted" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/>
+            <path d="M16 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </svg>
+        </button>
       </main>
       <section class="section_layout about-block">
         <div class="about-block__bg">
@@ -706,6 +840,118 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
     </main>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6a576ec01f9b918f8374cd15" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <!-- Hero background video: YouTube embed only (the old self-hosted mp4 is
+       retired from the page — file kept on disk, just unreferenced). The
+       iframe stays hidden until polling has *confirmed* real frame-by-frame
+       playback (not just a trusted state event, which can still fire around
+       a moment where YouTube shows its own gate/transport chrome), so no
+       play/pause button or transport UI is ever shown. -->
+  <script is:inline>
+    (function () {
+      var iframe = document.getElementById('hero-yt');
+      if (!iframe) return;
+      var wrap = document.querySelector('.hero-video');
+      var soundBtn = document.querySelector('.hero-sound-toggle');
+
+      function strip(player) {
+        // Captions can come back on from the viewer's own YouTube preference,
+        // so unload both module names every time playback (re)starts.
+        try { player.unloadModule('captions'); } catch (e) {}
+        try { player.unloadModule('cc'); } catch (e) {}
+        try { player.setOption('captions', 'track', {}); } catch (e) {}
+      }
+
+      window.onYouTubeIframeAPIReady = function () {
+        var player = new YT.Player('hero-yt', {
+          events: {
+            onReady: function (e) {
+              e.target.mute();
+              strip(e.target);
+              var p = e.target.playVideo();
+              if (p && p.catch) p.catch(function () {});
+            },
+            onStateChange: function (e) {
+              strip(e.target);
+              // No playlist= param is used (that's what makes YouTube flash
+              // playlist transport chrome), so loop it manually instead.
+              if (e.data === YT.PlayerState.ENDED) {
+                e.target.seekTo(0);
+                e.target.playVideo();
+              }
+            },
+            onApiChange: function (e) { strip(e.target); }
+          }
+        });
+
+        // Some browsers refuse autoplay until the page gets any interaction.
+        var kick = function () {
+          try { player.mute(); player.playVideo(); } catch (e) {}
+        };
+        ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (evt) {
+          window.addEventListener(evt, kick, { once: true, passive: true });
+        });
+
+        // Continuously verify genuine advancing playback before ever
+        // revealing the iframe. Runs for the life of the page — if playback
+        // ever stalls (buffering that actually stalls, a tab losing focus, a
+        // loop restart), the iframe hides again immediately rather than
+        // risking exposure of any native YouTube UI.
+        var wasPlaying = false;
+        var everConfirmed = false;
+        var stableTicks = 0;
+        var lastTime = -1;
+        // YouTube shows a brief "ghost" pause/transport icon of its own on
+        // the *first* PLAYING transition of an embed session, regardless of
+        // controls=0 or playlist params — a UI acknowledgment, not a real
+        // control. It's consistently gone well within a couple of seconds,
+        // so the first confirmation waits that out; a loop restart later in
+        // the same session doesn't retrigger it, so those can reveal fast.
+        setInterval(function () {
+          var state, t;
+          var neededTicks = everConfirmed ? 2 : 10; // ~400ms vs ~2s at 200ms/tick
+          try { state = player.getPlayerState(); } catch (err) { state = -99; }
+          if (state === YT.PlayerState.PLAYING) {
+            try { t = player.getCurrentTime(); } catch (err) { t = lastTime; }
+            stableTicks = (t > lastTime + 0.05) ? stableTicks + 1 : 0;
+            lastTime = t;
+            if (stableTicks >= neededTicks && !wasPlaying) {
+              wasPlaying = true;
+              everConfirmed = true;
+              if (wrap) wrap.classList.add('is-playing');
+            }
+          } else if (wasPlaying) {
+            wasPlaying = false;
+            stableTicks = 0;
+            lastTime = -1;
+            if (wrap) wrap.classList.remove('is-playing');
+          }
+        }, 200);
+
+        // Bottom-right sound toggle: video starts muted (required for
+        // autoplay); this lets a visitor opt in to audio.
+        if (soundBtn) {
+          soundBtn.hidden = false;
+          soundBtn.addEventListener('click', function () {
+            var wasMuted = player.isMuted();
+            if (wasMuted) {
+              player.unMute();
+              player.setVolume(100);
+            } else {
+              player.mute();
+            }
+            var isMutedNow = !wasMuted;
+            soundBtn.classList.toggle('is-muted', isMutedNow);
+            soundBtn.setAttribute('aria-pressed', String(!isMutedNow));
+            soundBtn.setAttribute('aria-label', isMutedNow ? 'Unmute video' : 'Mute video');
+          });
+        }
+      };
+
+      var tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+    })();
+  </script>
   <script src="/js/webflow.js" type="text/javascript"></script>
   <script is:inline src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.7.0/build/js/intlTelInput.min.js"></script>
   <script is:inline>
