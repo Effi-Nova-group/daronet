@@ -502,25 +502,25 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
           </div>
           <div class="split-content header-center">
             <nav role="navigation" data-w-id="4131a203-107f-b755-71f0-51eb460a7e64" class="nav-menu w-nav-menu">
-              <ul role="list" class="header-navigation none w-list-unstyled">
+              <ul role="list" class="header-navigation w-list-unstyled">
                 <li class="nav-item-wrapper">
-                  <a href="#" class="nav-link">Home</a>
+                  <a href="/" class="nav-link" aria-current="page">Home</a>
                 </li>
                 <li class="nav-item-wrapper">
-                  <a href="#" class="nav-link">About</a>
+                  <a href="/#about" class="nav-link">About</a>
                 </li>
                 <li class="nav-item-wrapper">
-                  <a href="#" class="nav-link">Pricing</a>
+                  <a href="/case-studies" class="nav-link">Case Studies</a>
                 </li>
                 <li class="nav-item-wrapper">
-                  <a href="/blog" class="nav-link">Blog</a>
+                  <a href="/blog" class="nav-link">Blogs</a>
                 </li>
-                                <li class="nav-item-wrapper mobile">
-                  <a href="#" class="nav-link sign-in mobile">Sign in</a>
+                <li class="nav-item-wrapper">
+                  <a href="/#contact" class="nav-link">Contact</a>
                 </li>
                 <li class="nav-item-wrapper mobile-button">
                   <div class="button-primary-gradient header-button mobile-button">
-                    <a href="#" class="button-primary small-v2 mobile-button w-button">Get started</a>
+                    <a href="#contact" class="button-primary small-v2 mobile-button w-button">Get started</a>
                   </div>
                 </li>
               </ul>
@@ -909,3 +909,40 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
   </script>
 </body>
 </html>
+
+<style>
+  /* Site nav - kept in step with src/layouts/Base.astro (the homepage is a
+     standalone Webflow export and carries its own copy of the header). */
+  .header-navigation .nav-link { color: rgba(255,255,255,0.65); }
+  .header-navigation .nav-link:hover,
+  .header-navigation .nav-link:focus-visible { color: #fff; }
+  .header-navigation .nav-link[aria-current="page"] { color: #fff; font-weight: 600; }
+
+  /* .header-wrapper is a space-between flex row (logo | links | CTA). Equalised gaps
+     push the links off true centre because the logo (160px) and the CTA button are
+     different widths, so pin the link group to the centre instead. */
+  @media (min-width: 992px) {
+    .header-wrapper { position: relative; }
+    .header-wrapper .split-content.header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .header-navigation { justify-content: center; }
+    .header-navigation .nav-item-wrapper:last-child { margin-right: 0; }
+  }
+
+  @media (min-width: 992px) and (max-width: 1180px) {
+    .header-navigation .nav-item-wrapper { margin-right: 22px; }
+  }
+  @media (min-width: 992px) and (max-width: 1040px) {
+    .header-navigation .nav-item-wrapper { margin-right: 16px; }
+    .header-navigation .nav-link { font-size: 0.94rem; }
+  }
+
+  /* Below 992px daronet.webflow.css hides .header-left, which also hid the hamburger,
+     leaving the collapsed menu unreachable. Restore it. */
+  @media (max-width: 991px) {
+    .header-wrapper .split-content.header-left { display: flex; }
+  }
+</style>

@@ -8,6 +8,11 @@ interface Props {
 
 const { title, description, bodyClass = "body", noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+
+// Trailing-slash-insensitive current-section match for nav highlighting
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isCurrent = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
 ---
 
 <!DOCTYPE html>
@@ -45,15 +50,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toStri
           </div>
           <div class="split-content header-center">
             <nav role="navigation" class="nav-menu w-nav-menu">
-              <ul role="list" class="header-navigation none w-list-unstyled">
+              <ul role="list" class="header-navigation w-list-unstyled">
                 <li class="nav-item-wrapper">
-                  <a href="/" class="nav-link">Home</a>
+                  <a href="/" class="nav-link" aria-current={isCurrent("/") ? "page" : undefined}>Home</a>
                 </li>
                 <li class="nav-item-wrapper">
                   <a href="/#about" class="nav-link">About</a>
                 </li>
                 <li class="nav-item-wrapper">
-                  <a href="/blog" class="nav-link">Blog</a>
+                  <a href="/case-studies" class="nav-link" aria-current={isCurrent("/case-studies") ? "page" : undefined}>Case Studies</a>
+                </li>
+                <li class="nav-item-wrapper">
+                  <a href="/blog" class="nav-link" aria-current={isCurrent("/blog") ? "page" : undefined}>Blogs</a>
                 </li>
                 <li class="nav-item-wrapper">
                   <a href="/#contact" class="nav-link">Contact</a>
@@ -110,3 +118,44 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toStri
   <script src="/js/webflow.js" type="text/javascript" is:inline></script>
 </body>
 </html>
+
+<style>
+  /* Nav: the current page reads at full strength, the rest sit muted.
+     Scoped with .header-navigation to win over .nav-link in daronet.webflow.css. */
+  .header-navigation .nav-link { color: rgba(255,255,255,0.65); }
+  .header-navigation .nav-link:hover,
+  .header-navigation .nav-link:focus-visible { color: #fff; }
+  .header-navigation .nav-link[aria-current="page"] { color: #fff; font-weight: 600; }
+
+  /* .header-wrapper is a space-between flex row (logo | links | CTA). Equalised gaps
+     push the links off true centre because the logo (160px) and the CTA button are
+     different widths, so pin the link group to the centre instead. */
+  @media (min-width: 992px) {
+    .header-wrapper { position: relative; }
+    .header-wrapper .split-content.header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .header-navigation { justify-content: center; }
+    /* Webflow's 32px right margin leaves a trailing gap on the last item */
+    .header-navigation .nav-item-wrapper:last-child { margin-right: 0; }
+  }
+
+  /* Five links now sit beside the logo and the CTA. Step the gap down so the inline
+     row still fits all the way to Webflow's 991px collapse breakpoint. */
+  @media (min-width: 992px) and (max-width: 1180px) {
+    .header-navigation .nav-item-wrapper { margin-right: 22px; }
+  }
+  @media (min-width: 992px) and (max-width: 1040px) {
+    .header-navigation .nav-item-wrapper { margin-right: 16px; }
+    .header-navigation .nav-link { font-size: 0.94rem; }
+  }
+
+  /* Below 992px daronet.webflow.css hides .header-left, which also hid the hamburger,
+     leaving the collapsed menu unreachable. Restore it; the CTA inside it keeps its
+     own existing rules (visible to 767px, then served by .mobile-button in the panel). */
+  @media (max-width: 991px) {
+    .header-wrapper .split-content.header-left { display: flex; }
+  }
+</style>
