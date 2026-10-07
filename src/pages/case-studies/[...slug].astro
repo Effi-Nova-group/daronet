@@ -134,18 +134,20 @@ const jsonLd = {
   .cs__meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; }
   .cs__date { color: rgba(255,255,255,0.55); font-size: 0.88rem; }
 
-  /* Logos arrive on mixed backgrounds (white-on-navy, red-on-white, teal-on-white),
-     so each sits on a white chip to read consistently against the dark theme.
-     The chip hugs the mark - a fixed box left uneven gaps and clipped the wider
-     logos, since every source file has a different aspect ratio. */
+  /* Client logo on the case study page: centred and cover-fitted. The box aspect
+     (1.43) sits between the two logos that use it, so cover crops nothing visible. */
   .cs__logo-chip {
-    display: inline-flex; align-items: center; justify-content: center;
-    height: 56px; width: auto; max-width: 160px;
-    padding: 6px 10px;
+    display: block;
+    width: 120px; height: 84px;
     background: #fff; border-radius: 12px;
+    overflow: hidden;
     box-shadow: 0 10px 28px -14px rgba(0,0,0,0.8);
   }
-  .cs__logo { height: 100%; width: auto; max-width: 100%; object-fit: contain; object-position: center; display: block; }
+  .cs__logo {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+  }
 
   /* Flexbox, not grid auto-fit: with repeat(auto-fit, minmax(160px, 240px)) the
      repetition count comes from the MAX track size, which collapses to one column
