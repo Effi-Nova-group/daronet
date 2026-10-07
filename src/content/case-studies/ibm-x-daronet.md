@@ -5,7 +5,6 @@ sector: "Enterprise Technology"
 title: "IBM × Daronet"
 subtitle: "Turning Audience Intelligence Into Global Growth"
 logo: "../../assets/case-studies/ibm-logo.png"
-logoBg: "#0f62fe"
 stats:
   - label: "ROAS"
     value: "11x"

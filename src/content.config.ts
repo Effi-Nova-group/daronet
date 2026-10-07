@@ -26,9 +26,6 @@ const caseStudies = defineCollection({
       title: z.string(),
       subtitle: z.string(),
       logo: image().optional(),
-      // Background of the logo file itself, so a plate can extend it edge to edge
-      // instead of upscaling a small raster to cover the field.
-      logoBg: z.string().optional(),
       heroImage: image().optional(),
       stats: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
       featured: z.boolean().default(false),

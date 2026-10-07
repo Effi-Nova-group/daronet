@@ -86,12 +86,12 @@ const jsonLd = {
             class="cs__hero-img"
           />
         ) : heroIsLogo ? (
-          <div class="cs__hero-plate" style={`background:${study.data.logoBg ?? '#fff'}`}>
+          <div class="cs__hero-plate">
             <Image
               src={study.data.logo!}
               alt={`${study.data.client} logo`}
-              widths={[380, 760]}
-              sizes="380px"
+              widths={[600, 1200]}
+              sizes="(min-width: 1200px) 1120px, 100vw"
               class="cs__hero-plate-img"
             />
           </div>
@@ -167,17 +167,13 @@ const jsonLd = {
 
   .cs__hero { border-radius: 16px; overflow: hidden; margin-bottom: 3rem; border: 1px solid rgba(255,255,255,0.08); background: #13111a; }
   .cs__hero-img { width: 100%; height: auto; display: block; }
-  /* No campaign imagery for this study - the client mark holds the hero slot.
-     The plate takes the logo's own background colour so the field is covered
-     edge to edge while the mark stays centred and crisp (see the card plate). */
-  .cs__hero-plate {
-    aspect-ratio: 16/9; display: grid; place-items: center;
-    padding: 2rem;
-  }
+  /* No campaign imagery for this study - the client logo fills the hero slot,
+     centred and cover-fitted. */
+  .cs__hero-plate { aspect-ratio: 16/9; overflow: hidden; }
   .cs__hero-plate-img {
-    max-width: 30%; max-height: 48%;
-    width: auto; height: auto;
-    object-fit: contain; display: block;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
   }
 
   .cs__hero-fallback {
