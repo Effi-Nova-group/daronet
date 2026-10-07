@@ -4,6 +4,7 @@ client: "BUFF Medical Resort"
 sector: "Health & Wellness Hospitality"
 title: "BUFF Medical Resort × Daronet"
 subtitle: "Turning Audience Intelligence Into Global Bookings"
+logo: "../../assets/case-studies/buff-medical-resort-logo.png"
 stats:
   - label: "ROAS"
     value: "9x"

@@ -44,11 +44,14 @@ const jsonLd = {
       <div class="cs-index__grid">
         {studies.map((study) => (
           <a href={`/case-studies/${study.id}/`} class="cs-card">
+            {/* Cards lead with the client logo, bled edge to edge - each mark carries
+                its own brand background. The campaign imagery is saved for the study
+                itself, where it has the room to be read. */}
             <div class="cs-card__media">
-              {study.data.heroImage ? (
+              {study.data.logo ? (
                 <Image
-                  src={study.data.heroImage}
-                  alt={`${study.data.client} campaign work`}
+                  src={study.data.logo}
+                  alt={`${study.data.client} logo`}
                   widths={[400, 800, 1200]}
                   sizes="(min-width: 900px) 50vw, 100vw"
                   class="cs-card__img"
@@ -57,17 +60,6 @@ const jsonLd = {
                 <div class="cs-card__fallback" aria-hidden="true">
                   <span class="cs-card__fallback-mark">{study.data.client.charAt(0)}</span>
                 </div>
-              )}
-              {study.data.logo && (
-                <span class="cs-card__logo-chip">
-                  <Image
-                    src={study.data.logo}
-                    alt={`${study.data.client} logo`}
-                    widths={[120, 240]}
-                    sizes="120px"
-                    class="cs-card__logo"
-                  />
-                </span>
               )}
             </div>
 
@@ -122,9 +114,10 @@ const jsonLd = {
   }
   .cs-card:hover { transform: translateY(-4px); border-color: rgba(255,46,77,0.35); box-shadow: 0 24px 60px -30px rgba(255,46,77,0.35); }
 
-  .cs-card__media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #13111a; }
-  .cs-card__img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 0.6s ease; }
-  .cs-card:hover .cs-card__img { transform: scale(1.04); }
+  .cs-card__media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #fff; }
+  /* Logos sit tight in their source files, so cover-fill the field but skip the
+     hover zoom - scaling would start clipping the marks. */
+  .cs-card__img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
   /* Branded panel stands in for a missing hero rather than an empty box */
   .cs-card__fallback {
@@ -137,17 +130,6 @@ const jsonLd = {
   }
   .cs-card__fallback-mark { font-size: clamp(3rem, 8vw, 5rem); font-weight: 700; letter-spacing: -0.04em; color: rgba(255,255,255,0.18); line-height: 1; }
 
-  /* Logos arrive on mixed backgrounds (white-on-navy, red-on-white, white-on-blue),
-     so each sits on a white chip to read consistently against the dark theme. */
-  .cs-card__logo-chip {
-    position: absolute; left: 1rem; bottom: 1rem; z-index: 1;
-    display: grid; place-items: center;
-    width: 86px; height: 46px; padding: 0.35rem 0.6rem;
-    background: #fff; border-radius: 10px;
-    box-shadow: 0 10px 28px -12px rgba(0,0,0,0.75);
-    overflow: hidden;
-  }
-  .cs-card__logo { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
 
   .cs-card__body { padding: 1.5rem 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
   .cs-card__sector { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; color: var(--accent-red); }

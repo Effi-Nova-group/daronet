@@ -14,6 +14,9 @@ export async function getStaticPaths() {
 const { study } = Astro.props;
 const { Content } = await render(study);
 
+// With no hero, the logo carries the hero slot - so don't also repeat it in the header.
+const heroIsLogo = !study.data.heroImage && !!study.data.logo;
+
 const formattedDate = study.data.publishedAt.toLocaleDateString('en-AU', {
   day: 'numeric', month: 'long', year: 'numeric',
 });
@@ -47,7 +50,7 @@ const jsonLd = {
         <p class="cs__subtitle">{study.data.subtitle}</p>
 
         <div class="cs__meta">
-          {study.data.logo && (
+          {study.data.logo && !heroIsLogo && (
             <span class="cs__logo-chip">
               <Image
                 src={study.data.logo}
@@ -82,6 +85,16 @@ const jsonLd = {
             sizes="(min-width: 1200px) 1120px, 100vw"
             class="cs__hero-img"
           />
+        ) : heroIsLogo ? (
+          <div class="cs__hero-plate">
+            <Image
+              src={study.data.logo!}
+              alt={`${study.data.client} logo`}
+              widths={[320, 640]}
+              sizes="320px"
+              class="cs__hero-plate-img"
+            />
+          </div>
         ) : (
           <div class="cs__hero-fallback" aria-hidden="true">
             <span class="cs__hero-fallback-mark">{study.data.client}</span>
@@ -121,16 +134,18 @@ const jsonLd = {
   .cs__meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; }
   .cs__date { color: rgba(255,255,255,0.55); font-size: 0.88rem; }
 
-  /* Logos arrive on mixed backgrounds (white-on-navy, red-on-white, white-on-blue),
-     so each sits on a white chip to read consistently against the dark theme. */
+  /* Logos arrive on mixed backgrounds (white-on-navy, red-on-white, teal-on-white),
+     so each sits on a white chip to read consistently against the dark theme.
+     The chip hugs the mark - a fixed box left uneven gaps and clipped the wider
+     logos, since every source file has a different aspect ratio. */
   .cs__logo-chip {
-    display: grid; place-items: center;
-    width: 112px; height: 56px; padding: 0.4rem 0.7rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 56px; width: auto; max-width: 160px;
+    padding: 6px 10px;
     background: #fff; border-radius: 12px;
     box-shadow: 0 10px 28px -14px rgba(0,0,0,0.8);
-    overflow: hidden;
   }
-  .cs__logo { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+  .cs__logo { height: 100%; width: auto; max-width: 100%; object-fit: contain; object-position: center; display: block; }
 
   /* Flexbox, not grid auto-fit: with repeat(auto-fit, minmax(160px, 240px)) the
      repetition count comes from the MAX track size, which collapses to one column
@@ -152,6 +167,19 @@ const jsonLd = {
 
   .cs__hero { border-radius: 16px; overflow: hidden; margin-bottom: 3rem; border: 1px solid rgba(255,255,255,0.08); background: #13111a; }
   .cs__hero-img { width: 100%; height: auto; display: block; }
+  /* No campaign imagery for this study - the client mark holds the hero slot,
+     contained rather than cover-cropped so it reads at full banner width. */
+  .cs__hero-plate {
+    aspect-ratio: 16/7; display: grid; place-items: center;
+    background: #fff; padding: 1.5rem;
+  }
+  .cs__hero-plate-img {
+    max-width: 44%; max-height: 72%;
+    width: auto; height: auto;
+    object-fit: contain; display: block;
+    border-radius: 10px;
+  }
+
   .cs__hero-fallback {
     aspect-ratio: 16/8; display: grid; place-items: center;
     background:
