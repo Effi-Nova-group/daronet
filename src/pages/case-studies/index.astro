@@ -49,13 +49,15 @@ const jsonLd = {
                 itself, where it has the room to be read. */}
             <div class="cs-card__media">
               {study.data.logo ? (
-                <Image
-                  src={study.data.logo}
-                  alt={`${study.data.client} logo`}
-                  widths={[400, 800, 1200]}
-                  sizes="(min-width: 900px) 50vw, 100vw"
-                  class="cs-card__img"
-                />
+                <div class="cs-card__plate" style={`background:${study.data.logoBg ?? '#fff'}`}>
+                  <Image
+                    src={study.data.logo}
+                    alt={`${study.data.client} logo`}
+                    widths={[300, 600]}
+                    sizes="320px"
+                    class="cs-card__plate-img"
+                  />
+                </div>
               ) : (
                 <div class="cs-card__fallback" aria-hidden="true">
                   <span class="cs-card__fallback-mark">{study.data.client.charAt(0)}</span>
@@ -115,9 +117,21 @@ const jsonLd = {
   .cs-card:hover { transform: translateY(-4px); border-color: rgba(255,46,77,0.35); box-shadow: 0 24px 60px -30px rgba(255,46,77,0.35); }
 
   .cs-card__media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #fff; }
-  /* Logos sit tight in their source files, so cover-fill the field but skip the
-     hover zoom - scaling would start clipping the marks. */
-  .cs-card__img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+
+  /* Every logo file is a centred mark on a flat, uniform field, so painting the
+     plate in that same colour extends the artwork edge to edge - identical to a
+     cover crop, but the mark stays centred, uncropped and crisp instead of being
+     upscaled from a small raster (IBM's source is only 225px). */
+  .cs-card__plate {
+    width: 100%; height: 100%;
+    display: grid; place-items: center;
+    padding: 1.25rem;
+  }
+  .cs-card__plate-img {
+    max-width: 52%; max-height: 56%;
+    width: auto; height: auto;
+    object-fit: contain; display: block;
+  }
 
   /* Branded panel stands in for a missing hero rather than an empty box */
   .cs-card__fallback {

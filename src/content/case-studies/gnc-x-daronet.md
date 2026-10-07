@@ -5,6 +5,7 @@ sector: "Health & Nutrition Retail"
 title: "GNC × Daronet"
 subtitle: "Turning Audience Intelligence Into an 8x ROAS Global E-Commerce Growth Engine"
 logo: "../../assets/case-studies/gnc-logo.png"
+logoBg: "#ffffff"
 heroImage: "../../assets/case-studies/gnc-hero.png"
 stats:
   - label: "ROAS"

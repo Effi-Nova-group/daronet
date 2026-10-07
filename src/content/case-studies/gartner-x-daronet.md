@@ -5,6 +5,7 @@ sector: "Research & Advisory"
 title: "Gartner × Daronet"
 subtitle: "Turning Audience Intelligence Into Record Engagement and 7x ROAS"
 logo: "../../assets/case-studies/gartner-logo.png"
+logoBg: "#002856"
 heroImage: "../../assets/case-studies/gartner-hero.png"
 stats:
   - label: "ROAS"
