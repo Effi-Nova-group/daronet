@@ -267,7 +267,7 @@ Uncomment to enable. Keep this message for futurehandoff clarity.
   text-transform: none;
   color: #fff;
 }
-.hero-content__inner { max-width: 84rem; margin: 0 auto; }
+.hero-content__inner { max-width: 88rem; margin: 0 auto; }
 .hero-content__title { font-size: clamp(2.5rem, 5.6vw, 5.25rem); line-height: 1.04; letter-spacing: -0.03em; font-weight: 700; max-width: 15ch; margin: 0 0 1.5rem; color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,0.45); }
 .hero-content__sub { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.55; max-width: 44rem; margin: 0 0 2rem; color: rgba(255,255,255,0.85); }
 .hero-content__cta .button-primary-gradient.header-button { display: inline-block !important; }
@@ -285,7 +285,7 @@ Uncomment to enable. Keep this message for futurehandoff clarity.
 /* Red-tinted frosted glass wrapper (no red glow) */
 .contact_full {
   width: 100%;
-  max-width: 84rem; /* matches the shared desktop content width */
+  max-width: 88rem; /* matches the shared desktop content width */
   margin: 0 auto;
   padding: clamp(2rem, 4vw, 3.5rem);
   border-radius: 20px;
@@ -476,7 +476,7 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
 /* ---------- Latest Insights (blog) section ---------- */
 .insights-section { padding: clamp(5rem, 10vw, 8rem) 0; background: #0a0208; color: #fff; }
-.insights-section__container { max-width: calc(84rem + 6rem); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+.insights-section__container { max-width: calc(88rem + 3rem); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
 .insights-section__header { text-align: center; max-width: 720px; margin: 0 auto 3.5rem; }
 .insights-section__title { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; color: #fff; margin: 0 0 1rem; }
 .insights-section__sub { font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,0.65); margin: 0; }
@@ -1059,13 +1059,20 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
     .header-navigation .nav-link { font-size: 0.94rem; }
   }
 
-  /* Desktop: a wider content column (84rem, ~48px side gutters at 1440px) shared
+  /* Desktop: a wider content column (88rem) and 24px side padding, shared
      by every homepage section so their left/right edges line up. */
   @media (min-width: 992px) {
     .container-large,
     .container-large-2,
-    .container-large-3 { max-width: 84rem; }
-    .container-default.w-container { max-width: calc(84rem + 48px); }
+    .container-large-3 { max-width: 88rem; }
+    .container-default.w-container { max-width: calc(88rem + 48px); }
+    /* .page-wrapper prefix: these must beat the same-specificity rules in the
+       stylesheet above, which Astro emits after this block. */
+    .page-wrapper .padding-global,
+    .page-wrapper .padding-global-2,
+    .page-wrapper .padding-global-4,
+    .page-wrapper .insights-section__container,
+    .page-wrapper .hero-content { padding-left: 1.5rem; padding-right: 1.5rem; }
   }
 
   /* Below 992px daronet.webflow.css hides .header-left, which also hid the hamburger,
