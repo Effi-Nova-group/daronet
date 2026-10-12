@@ -11,18 +11,18 @@ const mobileTiles = posts.slice(0, 3);
 <html data-wf-page="6a576ec21f9b918f8374cdac" data-wf-site="6a576ec01f9b918f8374cd15">
 <head>
   <meta charset="utf-8">
-  <title>Daronet — Enterprise Software House & Custom Back-End Architecture</title>
+  <title>Daronet — Bespoke Web Engineering, UI/UX & Performance-Based AI Marketing</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta name="google-site-verification" content="s5cn3ekVVNYrQJDY3AAgjWGBWVCNsnPFvIuGEtNUUkc" />
-  <meta name="description" content="Daronet engineers custom back-end architecture, secure integrations, and enterprise-grade software platforms built for scale.">
+  <meta name="description" content="Bespoke web engineering, advanced UI/UX, and performance-based AI marketing designed exclusively for ambitious enterprises.">
   <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()}>
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Daronet — Enterprise Software House & Custom Back-End Architecture">
-  <meta property="og:description" content="Daronet engineers custom back-end architecture, secure integrations, and enterprise-grade software platforms built for scale.">
+  <meta property="og:title" content="Daronet — Bespoke Web Engineering, UI/UX & Performance-Based AI Marketing">
+  <meta property="og:description" content="Bespoke web engineering, advanced UI/UX, and performance-based AI marketing designed exclusively for ambitious enterprises.">
   <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()}>
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Daronet — Enterprise Software House & Custom Back-End Architecture">
-  <meta name="twitter:description" content="Daronet engineers custom back-end architecture, secure integrations, and enterprise-grade software platforms built for scale.">
+  <meta name="twitter:title" content="Daronet — Bespoke Web Engineering, UI/UX & Performance-Based AI Marketing">
+  <meta name="twitter:description" content="Bespoke web engineering, advanced UI/UX, and performance-based AI marketing designed exclusively for ambitious enterprises.">
   <meta content="Webflow" name="generator">
   <link href="/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/css/webflow.css" rel="stylesheet" type="text/css">
@@ -205,14 +205,77 @@ Uncomment to enable. Keep this message for futurehandoff clarity.
   color: var(--accent-red); /* fallback */
 }
 
-.service-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
-@media (max-width: 767px) { .service-grid { grid-template-columns: 1fr; } }
+.about-block__body { color: rgba(255,255,255,0.75); }
+
+/* Core pillars (services) — 3 + 2 layout on a 6-column grid */
+.pillars-section { position: relative; padding: clamp(4rem, 8vw, 7rem) 0; }
+.pillars-section__header { text-align: center; max-width: 760px; margin: 0 auto 3.5rem; }
+.pillars-section__header .about-block__eyebrow { margin-bottom: 1.25rem; }
+.pillars-section__title { color: #fff; margin: 0; }
+.service-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.25rem; }
+.service-grid .service-tile { grid-column: span 2; }
+.service-grid .service-tile:nth-child(n+4) { grid-column: span 3; }
+@media (max-width: 991px) {
+  .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .service-grid .service-tile, .service-grid .service-tile:nth-child(n+4) { grid-column: span 1; }
+  .service-grid .service-tile:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 767px) {
+  .service-grid { grid-template-columns: 1fr; }
+  .service-grid .service-tile:last-child { grid-column: auto; }
+}
+.service-tile__sub { font-size: 0.95rem; font-weight: 600; line-height: 1.4; color: var(--accent-red-2); margin: 0 0 0.75rem; }
+.service-tile--featured { background: linear-gradient(140deg, rgba(255, 46, 77, 0.12), rgba(255, 46, 77, 0.03) 60%, rgba(255, 106, 61, 0.07)); border-color: rgba(255, 46, 77, 0.28); }
 .service-tile { position: relative; padding: 1.75rem; border-radius: 14px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease; }
 .service-tile:hover { border-color: rgba(255, 46, 77, 0.35); background: rgba(255, 46, 77, 0.03); box-shadow: 0 12px 40px -20px rgba(255, 46, 77, 0.5); }
 .service-tile__icon { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; background: linear-gradient(135deg, rgba(255, 46, 77, 0.15), rgba(255, 106, 61, 0.08)); border: 1px solid rgba(255, 46, 77, 0.28); color: var(--accent-red); margin-bottom: 1.1rem; }
 .service-tile__icon svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 1.75; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .service-tile__title { font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 0.45rem; letter-spacing: -0.01em; }
 .service-tile__desc { font-size: 0.94rem; line-height: 1.55; color: rgba(255,255,255,0.65); margin: 0; }
+
+/* Performance-based model deep dive */
+.performance-section { padding: 0 0 clamp(4rem, 8vw, 7rem); }
+.performance-panel {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2rem, 5vw, 4rem);
+  border-radius: 20px;
+  background: linear-gradient(140deg, rgba(255, 46, 77, 0.14), rgba(255, 46, 77, 0.05) 55%, rgba(255, 106, 61, 0.09));
+  border: 1px solid rgba(255, 46, 77, 0.22);
+  box-shadow: 0 20px 50px -25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+.performance-panel__split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+@media (max-width: 991px) { .performance-panel__split { grid-template-columns: 1fr; } }
+.performance-panel__title { color: #fff; margin: 0 0 1.25rem; }
+.performance-panel__body { color: rgba(255,255,255,0.75); margin: 0 0 2rem; }
+.performance-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.performance-point { padding: 1.4rem 1.5rem; border-radius: 14px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); }
+.performance-point__title { display: flex; align-items: center; gap: 0.6rem; font-size: 1.05rem; font-weight: 700; color: #fff; margin: 0 0 0.35rem; }
+.performance-point__title::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-red); box-shadow: 0 0 12px var(--accent-red); }
+.performance-point__desc { font-size: 0.94rem; line-height: 1.55; color: rgba(255,255,255,0.7); margin: 0; }
+.performance-panel__cta .button-primary-gradient.header-button { display: inline-block !important; }
+
+/* Hero copy, layered over the video. z-index sits above .canvas (2) so the CTA is clickable. */
+.hero-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(2.5rem, 7vh, 5rem);
+  text-transform: none;
+  color: #fff;
+}
+.hero-content__inner { max-width: 1240px; margin: 0 auto; }
+.hero-content__title { font-size: clamp(2.5rem, 5.6vw, 5.25rem); line-height: 1.04; letter-spacing: -0.03em; font-weight: 700; max-width: 15ch; margin: 0 0 1.5rem; color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,0.45); }
+.hero-content__sub { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.55; max-width: 44rem; margin: 0 0 2rem; color: rgba(255,255,255,0.85); }
+.hero-content__cta .button-primary-gradient.header-button { display: inline-block !important; }
+@media (max-width: 767px) {
+  .hero-content { padding: 0 1.25rem 2rem; }
+  .hero-content__title { margin-bottom: 1rem; }
+  .hero-content__sub { margin-bottom: 1.5rem; }
+}
 
 /* Contact block full-width tweaks (Block 04) */
 .contact_tollfree { text-align: center; margin-bottom: 2.5rem; color: #fff; }
@@ -391,8 +454,8 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
   .seaction-header-main {
     overflow: hidden !important;
     position: relative;
-    height: 50vh !important;
-    min-height: 50vh !important;
+    height: 88svh !important;
+    min-height: 560px !important;
   }
   .seaction-header-main::after {
     content: "";
@@ -565,6 +628,17 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
             <path d="M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
           </svg>
         </button>
+        <div class="hero-content">
+          <div class="hero-content__inner">
+            <h1 class="hero-content__title">We Build the <span class="heading-accent">Digital Future</span> You Didn’t Know Was Possible.</h1>
+            <p class="hero-content__sub">Bespoke web engineering, advanced UI/UX, and performance-based AI marketing designed exclusively for ambitious enterprises.</p>
+            <div class="hero-content__cta">
+              <div class="button-primary-gradient header-button">
+                <a href="#contact" class="button-primary small-v2 w-button">Let’s Build Your Solution</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
       <!-- Hero background video: self-hosted mp4, autoplay/muted/loop/playsinline.
            This script lives right after the hero markup (instead of at the end
@@ -611,44 +685,98 @@ button.contact-form__submit:disabled { opacity: 0.6; cursor: not-allowed; }
             <div class="padding-section-medium">
               <div class="about-block__split">
                 <div class="about-block__intro">
-                  <div class="about-block__eyebrow">About Daronet</div>
-                  <div class="margin-bottom margin-small">
-                    <h2 class="heading-style-h3-2"><strong>A digital agency built for <span class="accent">bold</span> brands</strong></h2>
-                  </div>
-                  <div class="margin-bottom margin-medium">
-                    <p class="text-size-medium-2">Daronet is a digital agency and software house founded in 1999. Headquartered in Israel, we specialise in custom web development, e-commerce stores, content management systems (CMS), search engine optimisation (SEO), and intranet/extranet solutions for commercial enterprises.</p>
+                  <div class="about-block__eyebrow">Why Daronet?</div>
+                  <h2 class="heading-style-h3-2"><strong>No Templates. No Limits. <span class="accent">Pure Performance.</span></strong></h2>
+                </div>
+                <div>
+                  <p class="text-size-medium-2 about-block__body">At Daronet, we don’t do standard. We engineer custom, highly advanced digital ecosystem solutions from scratch. Whether you need a bulletproof corporate platform or a complex enterprise app, we marry cutting-edge code with intuitive design to scale your business.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="services" class="pillars-section">
+        <div class="padding-global">
+          <div class="container-large">
+            <header class="pillars-section__header">
+              <div class="about-block__eyebrow">Our Services</div>
+              <h2 class="heading-style-h3-2 pillars-section__title">Our Core <span class="heading-accent">Pillars</span></h2>
+            </header>
+            <div class="service-grid">
+              <div class="service-tile">
+                <div class="service-tile__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 6.5h.01M11 6.5h.01"/></svg>
+                </div>
+                <h3 class="service-tile__title">Custom Advanced Web Design &amp; Development</h3>
+                <p class="service-tile__sub">Built for Speed, Scalability, and Absolute Security.</p>
+                <p class="service-tile__desc">We deliver bespoke web architecture tailored to your unique workflows. No restrictive themes—just clean, high-performance code engineered to dominate search results and outpace your competition.</p>
+              </div>
+              <div class="service-tile">
+                <div class="service-tile__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 7h16l-1.5 10a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+                </div>
+                <h3 class="service-tile__title">Custom Advanced E-Commerce Architecture</h3>
+                <p class="service-tile__sub">Turn High-Volume Traffic Into Frictionless Conversions.</p>
+                <p class="service-tile__desc">Next-generation e-commerce platforms built for complex product catalogs, global payment gateways, and custom ERP/CRM integrations. We optimize every pixel to maximize average order value and user retention.</p>
+              </div>
+              <div class="service-tile">
+                <div class="service-tile__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                </div>
+                <h3 class="service-tile__title">Custom Advanced UI/UX Engineering</h3>
+                <p class="service-tile__sub">Where Complex Functionality Meets Effortless Interaction.</p>
+                <p class="service-tile__desc">We design experiences, not just interfaces. Through rigorous user research, interactive prototyping, and psychological design principles, we turn intricate user journeys into simple, beautiful paths.</p>
+              </div>
+              <div class="service-tile">
+                <div class="service-tile__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg>
+                </div>
+                <h3 class="service-tile__title">Custom Advanced App Development</h3>
+                <p class="service-tile__sub">Native &amp; Hybrid Applications Built to Scale.</p>
+                <p class="service-tile__desc">From enterprise-level internal tools to consumer-facing mobile experiences, we build robust iOS, Android, and cross-platform apps with fluid animations, secure databases, and offline capabilities.</p>
+              </div>
+              <div class="service-tile service-tile--featured">
+                <div class="service-tile__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+                </div>
+                <h3 class="service-tile__title">Advanced AI Digital Marketing (Performance-Based)</h3>
+                <p class="service-tile__sub">We Put Our Money Where Our Mouth Is. Zero Risk. Pure Growth.</p>
+                <p class="service-tile__desc">Stop paying for vanity metrics like “clicks” or “impressions”. Our proprietary, AI-driven marketing infrastructure targets high-intent audiences to drive actual revenue. We win when you win—our performance-based model means our success is directly tied to your bottom line.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="performance" class="performance-section">
+        <div class="padding-global">
+          <div class="container-large">
+            <div class="performance-panel">
+              <div class="performance-panel__split">
+                <div>
+                  <div class="about-block__eyebrow">Performance-Based Model</div>
+                  <h2 class="heading-style-h3-2 performance-panel__title">Our “Skin in the Game” <span class="heading-accent">Philosophy</span></h2>
+                  <p class="text-size-medium-2 performance-panel__body">Traditional agencies charge massive monthly retainers regardless of your business growth. We do things differently. By leveraging predictive AI analytics and custom automation, we are so confident in our digital marketing capabilities that we offer a performance-based business model.</p>
+                  <div class="performance-panel__cta">
+                    <div class="button-primary-gradient header-button">
+                      <a href="#contact" class="button-primary small-v2 w-button">Let’s Build Your Solution</a>
+                    </div>
                   </div>
                 </div>
-                <div class="service-grid">
-                  <div class="service-tile">
-                    <div class="service-tile__icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 6.5h.01M11 6.5h.01"/></svg>
-                    </div>
-                    <h3 class="service-tile__title">Web Development</h3>
-                    <p class="service-tile__desc">Custom website development for small businesses, enterprises, and government groups.</p>
-                  </div>
-                  <div class="service-tile">
-                    <div class="service-tile__icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M4 7h16l-1.5 10a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
-                    </div>
-                    <h3 class="service-tile__title">E-Commerce</h3>
-                    <p class="service-tile__desc">Online shop development tailored to B2B and B2C markets.</p>
-                  </div>
-                  <div class="service-tile">
-                    <div class="service-tile__icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M3 17V7"/><path d="M9 17v-6"/><path d="M15 17V9"/><path d="M21 17V5"/><path d="M3 21h18"/></svg>
-                    </div>
-                    <h3 class="service-tile__title">Digital Marketing</h3>
-                    <p class="service-tile__desc">SEO and ongoing promotion within search engines.</p>
-                  </div>
-                  <div class="service-tile">
-                    <div class="service-tile__icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>
-                    </div>
-                    <h3 class="service-tile__title">Hosting &amp; Maintenance</h3>
-                    <p class="service-tile__desc">Comprehensive digital infrastructure and technical support.</p>
-                  </div>
-                </div>
+                <ul class="performance-points" role="list">
+                  <li class="performance-point">
+                    <h3 class="performance-point__title">Predictive AI Targeting</h3>
+                    <p class="performance-point__desc">We locate your exact target demographic with hyper-precision.</p>
+                  </li>
+                  <li class="performance-point">
+                    <h3 class="performance-point__title">Shared Risk, Shared Reward</h3>
+                    <p class="performance-point__desc">We align our fees with your defined Key Performance Indicators (KPIs).</p>
+                  </li>
+                  <li class="performance-point">
+                    <h3 class="performance-point__title">Guaranteed Alignment</h3>
+                    <p class="performance-point__desc">Our team works as your true growth partners, entirely focused on ROI.</p>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
